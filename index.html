@@ -10,12 +10,54 @@
   <body>
     <div id="example"></div>
     <script type="text/babel">
+    	//Understanding Lifecycle and Specs
+    	/*
+    		--Lifecycle--
+			componentWillMount: Invoked once on server and client side
+			componetDidMount: Invoked once on client side
+
+			--Specs--
+			getInitialState: return initail value (eg. count=0;)
+			getDefaultProps: sets fallback props value, if props arent supplied
+    	*/
+
+    	//1st example - Hello world
+    	/*
+		ReactDOM.render(
+			<h1>Hello World!</h1>,
+			document.getElementById('example')
+		);
+    	*/
+
+
+    	//2nd example -Creating custom components
+		/*
 		var HelloMessage = React.createClass({
 		  render: function() {
 		    return <div>Hello {this.props.name}</div>;
 		  }
 		});
 		ReactDOM.render(<HelloMessage name="Lakhan" />, document.getElementById('example'));
+		*/
+
+		//3rd example -Creating counter (Complex custom element)
+		var Counter = React.createClass({
+			getInitialState:function(){
+				return {count:0}
+			},
+			incrementCount:function(){
+				this.setState({count:this.state.count+1})
+			},
+			render:function(){
+				return (
+					<div>
+						<h1> Count : {this.state.count} </h1>
+						<button onClick={this.incrementCount}>Increment count </button>
+					</div>
+				)
+			}
+		})
+		ReactDOM.render(<Counter />,document.getElementById('example'));
     </script>
   </body>
 </html>
