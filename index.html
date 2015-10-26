@@ -41,6 +41,7 @@
 		*/
 
 		//3rd example -Creating counter (Complex custom element)
+		/*
 		var Counter = React.createClass({
 			getInitialState:function(){
 				return {count:0}
@@ -58,6 +59,45 @@
 			}
 		})
 		ReactDOM.render(<Counter />,document.getElementById('example'));
+		*/
+
+		//4th example : TODO using react.js
+
+		var TodoList = React.createClass({ // function that helps in creating list
+			render:function(){
+				var createItem = function(text,index){
+					return <li key={index+text}>{text}</li>;
+				};
+				return <ul>{this.props.items.map(createItem)}</ul>;
+			}
+		})
+		var TodoApp = React.createClass({
+			getInitialState:function(){
+				return {items:[],text:''};
+			},
+			onChange:function(e){
+				this.setState({text:e.target.value});
+			},
+			submitFrom:function(e){
+				e.preventDefault();
+				var newItem=this.state.items.concat([this.state.text]);
+				var newText='';
+				this.setState({items:newItem,text:newText});
+			},
+			render:function(){
+				return(
+					<div>
+					<h4> TodoList </h4>
+					<TodoList items={this.state.items} />
+					<form onSubmit={this.submitFrom}>
+						<input type="text" placeholder="Your next text" value={this.state.text} onChange={this.onChange}/>
+						<button> Add </button>
+					</form>
+					</div>
+				);
+			}
+		})
+		ReactDOM.render(<TodoApp />,document.getElementById('example'));
     </script>
   </body>
 </html>
