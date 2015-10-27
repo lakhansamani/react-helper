@@ -62,7 +62,7 @@
 		*/
 
 		//4th example : TODO using react.js
-
+		/*
 		var TodoList = React.createClass({ // function that helps in creating list
 			render:function(){
 				var createItem = function(text,index){
@@ -98,6 +98,26 @@
 			}
 		})
 		ReactDOM.render(<TodoApp />,document.getElementById('example'));
+		*/
+		//Handling state change
+		var NoLink = React.createClass({
+			getInitialState: function() {
+				return {message: 'Hello!'};
+			},
+			handleChange: function(event) {
+				this.setState({message: event.target.value});
+			},
+			render: function() {
+				var message = this.state.message;
+				return(
+					<div>
+						<h1>{this.state.message} </h1>
+						<input type="text" value={message} onChange={this.handleChange} />
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<NoLink/>,document.getElementById('example'));
     </script>
   </body>
 </html>
